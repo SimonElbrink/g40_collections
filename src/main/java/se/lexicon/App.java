@@ -60,18 +60,34 @@ public class App
 //        integers.add("1999");
 
         System.out.println("--- For-Loop ---");
-        for (Integer integer :
-                integers) {
+        for (Integer integer : integers) {
             System.out.println(integer);
+
+            //Don't Remove in a for-loop. Throws and concurrent modification exception.
+            //Use iterator instead.
+//            if (integer == 550){
+//                integers.remove(integer);
+//            }
         }
 
         System.out.println("--- Iterator ---");
 
-        Iterator iterator = integers.iterator();
+        Iterator<Integer> iterator = integers.iterator();
 
         while (iterator.hasNext()){
-            System.out.println(iterator.next());
+
+            Integer numbToRemove = 550;
+            Integer tempNumber = iterator.next();
+
+            if (numbToRemove.equals(tempNumber)){
+                iterator.remove();
+                continue;
+            }
+
+            System.out.println(tempNumber);
         }
+
+        System.out.println("Is 550 removed from integers?  = " + integers);
     }
 
     private static void wrappers_of_Primitives() {
